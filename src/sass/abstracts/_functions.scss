@@ -1,0 +1,32 @@
+@use "sass:map";
+@use "colors" as *;
+@use "typography" as *;
+@use "sizes" as *;
+
+@function clr($color, $shade) {
+  @if (not map.has-key($colors, $color, $shade)) {
+    @error "Please provide a valid color and shade. Colors are #{map.keys($colors)}";
+  }
+  @return map.get($colors, $color, $shade);
+}
+
+@function fs($font-size) {
+  @if (not map.has-key($font-sizes, $font-size)) {
+    @error "Please provide a valid font-size. Font sizes are #{map.keys($font-sizes)}";
+  }
+  @return map.get($font-sizes, $font-size);
+}
+
+@function fw($font-weight) {
+  @if (not map.has-key($font-weights, $font-weight)) {
+    @error "Please provide a valid font-weight. Font weights are #{map.keys($font-weights)}";
+  }
+  @return map.get($font-weights, $font-weight);
+}
+
+@function size($size) {
+  @if (not map.has-key($sizes, $size)) {
+    @error "Please provide a valid size. Sizes are #{map.keys($sizes)}";
+  }
+  @return map.get($sizes, $size);
+}
