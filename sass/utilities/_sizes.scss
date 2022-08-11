@@ -1,0 +1,16 @@
+@use "../abstracts" as *;
+
+$sides: (block, block-start, block-end, inline, inline-start, inline-end);
+
+@each $type in (padding, margin) {
+  @each $size, $value in $sizes {
+    .#{$type}-#{$size} {
+      #{$type}: $value;
+    }
+    @each $side in $sides {
+      .#{$type}-#{$side}-#{$size} {
+        #{$type}-#{$side}: $value;
+      }
+    }
+  }
+}

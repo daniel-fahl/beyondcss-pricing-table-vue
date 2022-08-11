@@ -1,0 +1,8 @@
+@use "colors" as *;
+
+@function clr($color, $shade) {
+  @if (not map.has-key($colors, $color, $shade)) {
+    @error "Please provide a valid color and shade. Colors are #{map.keys($colors)}";
+  }
+  @return map.get($colors, $color, $shade);
+}

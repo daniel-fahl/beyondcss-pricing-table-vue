@@ -1,0 +1,22 @@
+@use "breakpoints" as *;
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+
+@mixin mq($size) {
+  $breakpoint: null;
+  @if (map.has-key($breakpoints, $size)) {
+    // It's in the map
+    $breakpoint: map.get($breakpoints, $size);
+  } @else if (meta.type-of($size) == "number" and not math.is-unitless($size)) {
+    // It's a number and it has a unit
+    $breakpoint: $size;
+  } @else {
+    // It's neither -> so it's invalid
+    @error "invalid breakpoint provided. Valid is one of (#{map.keys($breakpoints)}) or a number with a unit (e.g. 60em or 800px)";
+  }
+
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
